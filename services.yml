@@ -1,0 +1,8 @@
+---
+- name: Starting and Stopping Services
+  hosts: db
+  tasks: 
+    - service: name=vsftpd state=started
+      when: ansible_hosts == "joomlaserver3"
+    - service: name=chronyd state=stopped
+      when: ansible_host == "editignserver2"

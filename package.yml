@@ -1,0 +1,23 @@
+---
+- name: Installing multiple Packages
+  hosts: all
+  tasks:
+    - name: Install Packages
+      yum: name={{ item }} state=latest
+      with_items:
+        - httpd
+        - vsftpd
+        - ftp
+        - zsh
+    - name: Install Different Method Packages
+      yum:
+        name:
+          - nginx
+          - mysqld
+        state: present
+    - name: 
+      yum:
+        name: ['make','epel-release']
+        state: present
+   
+

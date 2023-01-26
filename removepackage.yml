@@ -1,0 +1,9 @@
+---
+- name: Remove the installed Packages
+  hosts: all
+  tasks: 
+    - name: Remove Apache Packages
+      yum:
+        name: 
+          - httpd
+        state: removed

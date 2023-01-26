@@ -1,0 +1,34 @@
+---
+- name: Config Apache web server 
+  hosts: test
+  tasks:
+    - name: Install Apache Packages
+      yum: 
+        name: httpd
+        state: present
+    
+    - name: Start the Apache Service
+      service: 
+        name: httpd
+        state: started
+    
+    - name: Define the Firewall rule
+      firewalld:
+        port: 80/tcp
+        permanent: true
+        state: enabled
+
+    - name: Reload the firewall config 
+      systemd: 
+        name: firewalld
+        state: reloaded
+    
+    - name: Copy Web file to Apache Directory 
+      copy: 
+        src: /root/index.html
+        dest: /var/www/html/
+
+    - name: Restart the Apache Services
+      service: 
+        name: httpd
+        state: restarted
